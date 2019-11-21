@@ -1,0 +1,11 @@
+$ORIGIN bind9-healthcheck.
+$TTL 86400
+@	SOA	ns1.bind9-healthcheck.	hostmaster.bind9-healthcheck. (
+		2001062501 ; serial
+		10  
+		10  
+		10  
+		10 )
+;
+	NS	ns1.bind9-healthcheck.
+ns1 A   127.0.0.99
