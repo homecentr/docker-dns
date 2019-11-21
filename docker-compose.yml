@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  dns:
+    build: .
+    dns:
+      - 127.0.0.1 # important for health check
+    restart: unless-stopped
+    volumes:
+      - "./example:/config:rw"
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 9000:9000/tcp
