@@ -33,11 +33,7 @@ services:
 ```
 
 ### Configuration
-See the `example/named.conf` for a quickstart or [BIND9 documentation](https://kb.isc.org/docs/aa-01031) for full configuration reference. The root configuration file (named.conf) is expected to be at `/config/named.conf`. This config file should also contain the following statement:
-```
-include "/config-default/default.conf";
-```
-This includes the piece of configuration which is built into the container which sets up statistics endpoint and dummy zone for the health check.
+See the `example/named.conf` for a quickstart or [BIND9 documentation](https://kb.isc.org/docs/aa-01031) for full configuration reference. The root configuration file (named.conf) is expected to be at `/config/named.conf`. The container contains a piece of built-in configuration which automatically sets up the statistics endpoint and a zone for health check.
 
 ## Exposed ports
 

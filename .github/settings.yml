@@ -1,7 +1,7 @@
 # https://developer.github.com/v3/repos/#edit
 repository:
   name: docker-dns
-  description: ""
+  description: "ISC BIND9 DNS server with built-in metrics for Prometheus."
   homepage: https://homecentr.github.io/
   private: false
   has_issues: true
@@ -21,7 +21,7 @@ branches:
     protection:
       required_status_checks:
         strict: true
-        contexts: [ ".github/workflows/ci.yml" ]
+        contexts: [ "build", "Semantic Pull Request" ]
       required_pull_request_reviews: null
       enforce_admins: false
       restrictions:
