@@ -1,5 +1,5 @@
 # HomeCenter - DNS
-This container contains the [BIND9 DNS server](https://www.isc.org/bind/) along with a metrics endpoint compatible with [Prometheus](https://prometheus.io/).
+This container contains the [BIND9 DNS server](https://www.isc.org/bind/).
 
 ## Project status
 
@@ -41,4 +41,4 @@ See the `example/named.conf` for a quickstart or [BIND9 documentation](https://k
 |------|-------------|
 | 53/tcp | DNS protocol over TCP |
 | 53/udp | DNS protocol over UDP |
-| 9000/tcp | HTTP endpoint with Prometheus metrics |
+| 8888/tcp | Default port for statistics, is not opened by default, must be configured in named.conf |
