@@ -1,10 +1,10 @@
-FROM alpine:3.11.2
+FROM alpine:3.1
 
 LABEL maintainer="Lukas Holota <me@lholota.com>"
 
 # TODO: Scan vulnerabilities to check which packages should be upgraded
-RUN apk add --no-cache bind=9.14.8-r5 && \
-    mkdir /config-default
+#RUN apk add --no-cache bind=9.14.8-r5 && \
+RUN mkdir /config-default
 
 COPY ./config/named.conf /config-default/
 COPY ./config/healthcheck.conf /config-default/
