@@ -44,6 +44,5 @@ jobs:
           image-reference: "homecentr-dns:${{ steps.vars.outputs.docker_tag }}"
           dockerfile-path: "./Dockerfile"
           fail-build: true
-          include-app-packages: true
       - name: Anchore inline scan JSON results
         run: for j in `ls ./anchore-reports/*.json`; do echo "---- ${j} ----"; cat ${j}; echo; done
