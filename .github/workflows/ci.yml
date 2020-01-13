@@ -14,13 +14,13 @@ jobs:
         id: vars
         run: echo ::set-output name=docker_tag::$(echo ${GITHUB_REF} | cut -d'/' -f3)-${GITHUB_SHA}
       - name: Build Docker image
-        run: docker build . -t homecentr-dns:${{ steps.vars.outputs.docker_tag }}
+        run: docker build . --file Dockerfile --tag homecentr-dns:${{ steps.vars.outputs.docker_tag }}
       - name: Verify Dockerfile with Hadolint
         uses: brpaz/hadolint-action@master
       - name: Scan with Phonito Security
         uses: phonito/phonito-scanner-action@master
         with:
-          image: myapp:${{ steps.vars.outputs.docker_tag }}
+          image: homecentr-dns:${{ steps.vars.outputs.docker_tag }}
           phonito-token: '${{ secrets.PHONITO_TOKEN }}'      
 
 
