@@ -19,7 +19,7 @@ jobs:
         run: echo ::set-output name=docker_tag::$(echo ${GITHUB_REF} | cut -d'/' -f3)-${GITHUB_SHA}
       
       - name: Build Docker image
-        run: docker build . --file Dockerfile --tag $QUAY_IMAGE_NAME:${{ steps.vars.outputs.docker_tag }} --label quay.expires-after=2h
+        run: docker build . --file Dockerfile --tag ${{ env.QUAY_IMAGE_NAME }}:${{ steps.vars.outputs.docker_tag }} --label quay.expires-after=2h
       
       - name: Verify Dockerfile with Hadolint
         uses: brpaz/hadolint-action@master
@@ -41,7 +41,7 @@ jobs:
       - name: Scan image with Anchore
         uses: anchore/scan-action@master
         with:
-          image-reference: "$QUAY_IMAGE_NAME:${{ steps.vars.outputs.docker_tag }}"
+          image-reference: ${{ env.QUAY_IMAGE_NAME }}:${{ steps.vars.outputs.docker_tag }}
           dockerfile-path: "./Dockerfile"
           fail-build: true
       - name: Anchore inline scan JSON results
