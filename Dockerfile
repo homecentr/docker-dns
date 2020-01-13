@@ -1,26 +1,28 @@
-FROM alpine:3.3
+FROM node:11.0-stretch
 
-LABEL maintainer="Lukas Holota <me@lholota.com>"
+# FROM alpine:3.3
 
-RUN apk add --no-cache bind=9.10.4_p8-r1 && \
-    mkdir /config-default
+# LABEL maintainer="Lukas Holota <me@lholota.com>"
 
-COPY ./config/named.conf /config-default/
-COPY ./config/healthcheck.conf /config-default/
-COPY ./config/healthcheck.zone /config-default/
+# RUN apk add --no-cache bind=9.10.4_p8-r1 && \
+#     mkdir /config-default
 
-HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 CMD [ "nslookup", "ns1.bind9-healthcheck", "127.0.0.1" ]
+# COPY ./config/named.conf /config-default/
+# COPY ./config/healthcheck.conf /config-default/
+# COPY ./config/healthcheck.zone /config-default/
 
-# Config directory
-VOLUME "/config"
+# HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 CMD [ "nslookup", "ns1.bind9-healthcheck", "127.0.0.1" ]
 
-# DNS protocol
-EXPOSE 53/tcp 53/udp
+# # Config directory
+# VOLUME "/config"
 
-# Dynamic updates from DHCP server
-EXPOSE 953/tcp
+# # DNS protocol
+# EXPOSE 53/tcp 53/udp
 
-# Default statistics port, not opened by default, must be configured
-EXPOSE 8888/tcp
+# # Dynamic updates from DHCP server
+# EXPOSE 953/tcp
 
-ENTRYPOINT ["/usr/sbin/named", "-f", "-g", "-4", "-c", "/config-default/named.conf"]
+# # Default statistics port, not opened by default, must be configured
+# EXPOSE 8888/tcp
+
+# ENTRYPOINT ["/usr/sbin/named", "-f", "-g", "-4", "-c", "/config-default/named.conf"]
