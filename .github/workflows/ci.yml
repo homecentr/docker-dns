@@ -10,10 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - run: docker build . -t homecentr/dns:feature
-      - uses: anchore/scan-action@master
+      - name: Build Docker image
+        run: docker build . -t local/dns:latest
+      - name: Verify Dockerfile with Hadolint
+        uses: brpaz/hadolint-action@master
+      - name: Scan image with Anchore
+        uses: anchore/scan-action@master
         with:
-          image-reference: "homecentr/dns:feature"
+          image-reference: "local/dns:latest"
           dockerfile-path: "./Dockerfile"
           fail-build: true
-          include-app-packages: true
+      - name: Anchore inline scan JSON results
+        run: for j in `ls ./anchore-reports/*.json`; do echo "---- ${j} ----"; cat ${j}; echo; done
