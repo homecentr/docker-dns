@@ -10,4 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - run: docker build .
+      - run: docker build . -t homecentr/dns:feature
+      - uses: anchore/scan-action@master
+        with:
+          image-reference: "homecentr/dns:feature"
+          dockerfile-path: "./Dockerfile"
+          fail-build: true
+          include-app-packages: true
