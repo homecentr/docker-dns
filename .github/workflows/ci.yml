@@ -25,11 +25,10 @@ jobs:
         uses: brpaz/hadolint-action@master
 
       - name: Log into Quay.io
-        run: "echo ${{ secrets.QUAY_PASSWORD }} | docker login --username ${{ secrets.QUAY_USERNAME }} --password-stdin"      
+        run: "echo ${{ secrets.QUAY_PASSWORD }} | docker login --username ${{ secrets.QUAY_USERNAME }} --password-stdin quay.io"      
 
       - name: "Push image to Quay.io"
         run: "docker push $QUAY_IMAGE_NAME:${{ steps.vars.outputs.docker_tag }}"
-
 
 
       # - name: Scan with Phonito Security
