@@ -41,7 +41,7 @@ jobs:
       - name: Scan image with Anchore
         uses: anchore/scan-action@master
         with:
-          image-reference: "homecentr-dns:${{ steps.vars.outputs.docker_tag }}"
+          image-reference: "$QUAY_IMAGE_NAME:${{ steps.vars.outputs.docker_tag }}"
           dockerfile-path: "./Dockerfile"
           fail-build: true
       - name: Anchore inline scan JSON results
