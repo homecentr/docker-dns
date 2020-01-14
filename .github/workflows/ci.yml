@@ -34,7 +34,7 @@ jobs:
       - name: Scan with Phonito Security
         uses: phonito/phonito-scanner-action@master
         with:
-          image: homecentr-dns:${{ steps.vars.outputs.docker_tag }}
+          image: ${{ env.QUAY_IMAGE_NAME }}:${{ steps.vars.outputs.docker_tag }}
           phonito-token: '${{ secrets.PHONITO_TOKEN }}'      
       #
       #
