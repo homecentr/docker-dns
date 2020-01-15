@@ -6,7 +6,7 @@ on:
   pull_request:
 
 env:
-  QUAY_IMAGE_NAME: "quay.io/homecentr/dns"  
+  IMAGE_NAME: "homecentr/dns"  
 
 jobs:
   build:
@@ -17,39 +17,15 @@ jobs:
       - name: Set tag var
         id: vars
         run: echo ::set-output name=docker_tag::$(echo ${GITHUB_REF} | cut -d'/' -f3)-${GITHUB_SHA}
+
+      - name: Verify Dockerfile with Hadolint
+        uses: brpaz/hadolint-action@master
       
       - name: Build Docker image
-        run: docker build . --file Dockerfile --tag ${{ env.QUAY_IMAGE_NAME }}:${{ steps.vars.outputs.docker_tag }} --label quay.expires-after=2h
-      
-      # - name: Verify Dockerfile with Hadolint
-      #   uses: brpaz/hadolint-action@master
-
-      # - name: Log into Quay.io
-      #   run: "echo ${{ secrets.QUAY_PASSWORD }} | docker login --username ${{ secrets.QUAY_USERNAME }} --password-stdin quay.io"      
-
-      # - name: "Push image to Quay.io"
-      #   run: "docker push $QUAY_IMAGE_NAME:${{ steps.vars.outputs.docker_tag }}"
-
+        run: docker build . --file Dockerfile --tag ${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.docker_tag }} --label quay.expires-after=2h
 
       - name: Scan with Phonito Security
         uses: phonito/phonito-scanner-action@master
-        id: phonito
         with:
-          image: ${{ env.QUAY_IMAGE_NAME }}:${{ steps.vars.outputs.docker_tag }}
+          image: ${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.docker_tag }}
           phonito-token: '${{ secrets.PHONITO_TOKEN }}'
-
-      - name: Check Phonito output
-        run: echo "${{ steps.phonito.outputs }}"
-      #
-      #
-      # - name: Scan image with Anchore
-      #   id: anchore
-      #   uses: anchore/scan-action@master
-      #   with:
-      #     image-reference: ${{ env.QUAY_IMAGE_NAME }}:${{ steps.vars.outputs.docker_tag }}
-      #     dockerfile-path: "./Dockerfile"
-      #     fail-build: true
-      # - name: Found vulnerabilities
-      #   run: cat "${{ steps.anchore.outputs.vulnerabilities }}"
-      # - name: Anchore inline scan JSON results
-      #   run: for j in `ls ./anchore-reports/*.json`; do echo "---- ${j} ----"; cat ${j}; echo; done

@@ -18,6 +18,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Verify Dockerfile with Hadolint
+        uses: brpaz/hadolint-action@master
+
       - name: "Build Docker image"
         if: env.RELEASE_VERSION != ''
         run: |
@@ -29,6 +32,12 @@ jobs:
               --label "org.label-schema.vendor=HomeCentr" \
               --label "version=$RELEASE_VERSION" \
               --label "org.label-schema.build-date=$(date '+%F %T')"
+
+      - name: Scan with Phonito Security
+        uses: phonito/phonito-scanner-action@master
+        with:
+          image: ${{ env.IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
+          phonito-token: '${{ secrets.PHONITO_TOKEN }}'
 
       - name: "Tag image as latest"
         if: env.RELEASE_VERSION != ''
