@@ -1,8 +1,7 @@
 name: Regular Docker image vulnerability scan
 on:
-  pull_request:
-#   schedule:
-#     - cron: '0 6 * * *'
+  schedule:
+    - cron: '0 6 * * *'
 
 env:
   IMAGE_NAME: 'homecentr/dns'
