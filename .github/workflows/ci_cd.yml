@@ -34,6 +34,7 @@ jobs:
               --label "org.label-schema.build-date=$(date '+%F %T')"
 
       - name: Scan with Phonito Security
+        if: env.RELEASE_VERSION != ''
         uses: phonito/phonito-scanner-action@master
         with:
           image: ${{ env.IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
