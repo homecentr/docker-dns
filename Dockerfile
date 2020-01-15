@@ -1,9 +1,8 @@
-FROM alpine
+FROM alpine:3.3
 
 LABEL maintainer="Lukas Holota <me@lholota.com>"
 
-RUN apk upgrade --no-cache && \
-    apk add --no-cache bind && \
+RUN apk add --no-cache bind=9.10.4_p8-r1 && \
     mkdir /config-default
 
 COPY ./config/named.conf /config-default/
