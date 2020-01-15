@@ -1,5 +1,7 @@
 FROM node:11.0-stretch 
 
+RUN apt-get update && apt-get install binutils
+
 # FROM alpine:3.3
 
 # LABEL maintainer="Lukas Holota <me@lholota.com>"

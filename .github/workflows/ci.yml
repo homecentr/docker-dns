@@ -21,8 +21,8 @@ jobs:
       - name: Build Docker image
         run: docker build . --file Dockerfile --tag ${{ env.QUAY_IMAGE_NAME }}:${{ steps.vars.outputs.docker_tag }} --label quay.expires-after=2h
       
-      - name: Verify Dockerfile with Hadolint
-        uses: brpaz/hadolint-action@master
+      # - name: Verify Dockerfile with Hadolint
+      #   uses: brpaz/hadolint-action@master
 
       # - name: Log into Quay.io
       #   run: "echo ${{ secrets.QUAY_PASSWORD }} | docker login --username ${{ secrets.QUAY_USERNAME }} --password-stdin quay.io"      
