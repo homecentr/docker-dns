@@ -33,9 +33,13 @@ jobs:
 
       - name: Scan with Phonito Security
         uses: phonito/phonito-scanner-action@master
+        id: phonito
         with:
           image: ${{ env.QUAY_IMAGE_NAME }}:${{ steps.vars.outputs.docker_tag }}
-          phonito-token: '${{ secrets.PHONITO_TOKEN }}'      
+          phonito-token: '${{ secrets.PHONITO_TOKEN }}'
+
+      - name: Check Phonito output
+        run: echo "${{ steps.phonito.outputs }}"
       #
       #
       # - name: Scan image with Anchore
