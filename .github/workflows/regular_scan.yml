@@ -6,15 +6,15 @@ on:
 env:
   IMAGE_NAME: 'homecentr/dns'
 
-  jobs:
-    build:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Pull Docker image
-          runs: docker pull ${{ env.IMAGE_NAME }}:latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull Docker image
+        runs: docker pull ${{ env.IMAGE_NAME }}:latest
 
-        - name: Scan image for vulnerabilities
-          uses: phonito/phonito-scanner-action@master
-          with:
-            image: ${{ env.IMAGE_NAME }}:latest
-            phonito-token: '${{ secrets.PHONITO_TOKEN }}'
+      - name: Scan image for vulnerabilities
+        uses: phonito/phonito-scanner-action@master
+        with:
+          image: ${{ env.IMAGE_NAME }}:latest
+          phonito-token: '${{ secrets.PHONITO_TOKEN }}'
