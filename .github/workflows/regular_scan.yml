@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Pull Docker image
-        runs: docker pull ${{ env.IMAGE_NAME }}:latest
+        run: docker pull ${{ env.IMAGE_NAME }}:latest
 
       - name: Scan image for vulnerabilities
         uses: phonito/phonito-scanner-action@master
