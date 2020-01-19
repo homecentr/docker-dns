@@ -1,18 +1,35 @@
 FROM alpine:3.11.2
 
-LABEL maintainer="Lukas Holota <me@lholota.com>"
+ARG uid=7001 
+ARG gid=7001
 
-RUN apk add --no-cache bind=9.14.8-r5 libcap=2.27-r0 && \
+LABEL maintainer="Lukas Holota <me@lholota.com>"
+LABEL uid=${uid}
+LABEL gid=${gid}
+
+RUN cat /etc/passwd
+
+RUN addgroup -g ${gid} dns && \
+    adduser dns -u ${uid} -G dns -D && \
+    apk add --no-cache bind=9.14.8-r5 libcap=2.27-r0 && \
+    # Prepare directory for pid file so that also non-root user can write into it (# chmod 0757 /var/run/named && \)
+    chown -R dns:dns /var/run/named && \
     # Create directory for built-in configs
     mkdir /config-default && \
-    # Prepare directory for pid file so that also non-root user can write into it
-    chmod 0757 /var/run/named && \
+    # mkdir /config && chown -R dns:dns /config && \
     # Grant the named process to open a well-known port (1-1024) which normally requires root permissions
     setcap 'cap_net_bind_service=+ep' /usr/sbin/named
 
+# Copy default config files to the container
 COPY ./config/named.conf /config-default/
 COPY ./config/healthcheck.conf /config-default/
 COPY ./config/healthcheck.zone /config-default/
+ 
+    # Change ownership of the default config and allow the dns user to read them
+RUN chown -R ${uid}:${gid} /config-default && \
+    chmod -R 0550 /config-default
+
+USER ${uid}:${gid}
 
 HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 CMD [ "nslookup", "ns1.bind9-healthcheck", "127.0.0.1" ]
 

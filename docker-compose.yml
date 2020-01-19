@@ -2,7 +2,8 @@ version: "3.7"
 services:
   dns:
     build: .
-    user: 1050:1050
+    image: homecentr/dns
+    #user: 1050:1050
     dns:
       - 127.0.0.1 # important for health check
     restart: unless-stopped
