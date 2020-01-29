@@ -16,3 +16,7 @@ dependencies {
     testCompile "org.testcontainers:testcontainers:1.12.5"
     testCompile "dnsjava:dnsjava:2.1.9"
 }
+
+test {
+    systemProperty 'image_tag', System.getProperty('image_tag')
+}

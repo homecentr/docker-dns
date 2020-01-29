@@ -17,7 +17,7 @@ public abstract class ContainerTestBase {
 
         System.out.println(Paths.get(System.getProperty("user.dir"), "..", "example").normalize());
 
-        _container = new GenericContainer<>("homecentr/dns")
+        _container = new GenericContainer<>(System.getProperty("image_tag", "homecentr/dns"))
                 .withFileSystemBind(Paths.get(System.getProperty("user.dir"), "..", "example").normalize().toString(), "/config")
                 .waitingFor(Wait.forHealthcheck());
 
