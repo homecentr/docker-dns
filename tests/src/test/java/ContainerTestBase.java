@@ -11,6 +11,10 @@ public abstract class ContainerTestBase {
 
     @BeforeClass
     public static void setUp() {
+        String configDirPath = Paths.get(System.getProperty("user.dir"), "..", "example").normalize().toString();
+
+        System.out.println("Config dir path: " + configDirPath);
+
         System.out.println(Paths.get(System.getProperty("user.dir"), "..", "example").normalize());
 
         _container = new GenericContainer<>("homecentr/dns")
