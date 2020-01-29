@@ -1,4 +1,6 @@
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xbill.DNS.*;
 
 import java.net.InetAddress;
@@ -8,8 +10,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class DnsContainerShould extends ContainerTestBase {
+    private static final Logger logger = LoggerFactory.getLogger(ContainerTestBase.class);
+
     @Test
     public void resolveExternalZoneViaForwarders() throws UnknownHostException, TextParseException {
+        logger.warn("Test: resolveExternalZoneViaForwarders");
+
         Lookup lookup = new Lookup("google.com", Type.A);
         lookup.setResolver(createResolver());
 
@@ -21,6 +27,8 @@ public class DnsContainerShould extends ContainerTestBase {
 
     @Test
     public void resolveInternallyDefinedZone() throws TextParseException, UnknownHostException {
+        logger.warn("Test: resolveInternallyDefinedZone");
+
         Lookup lookup = new Lookup("some-record.test", Type.A);
         lookup.setResolver(createResolver());
 

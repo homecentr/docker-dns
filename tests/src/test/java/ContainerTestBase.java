@@ -10,29 +10,24 @@ import org.testcontainers.containers.wait.strategy.Wait;
 import java.nio.file.Paths;
 
 public abstract class ContainerTestBase {
+    private static final Logger logger = LoggerFactory.getLogger(ContainerTestBase.class);
+
     private static GenericContainer _container;
 
     @BeforeClass
     public static void setUp() {
+        String dockerImageTag = System.getProperty("image_tag", "homecentr/dns");
         String configDirPath = Paths.get(System.getProperty("user.dir"), "..", "example").normalize().toString();
 
-        System.out.println("Config dir path: " + configDirPath);
-        System.out.println("Image: " + System.getProperty("image_tag", "homecentr/dns"));
-
-        System.out.println(Paths.get(System.getProperty("user.dir"), "..", "example").normalize());
-
-
-
-        Logger logger = LoggerFactory.getLogger(ContainerTestBase.class);
-        logger.info("!!! HELLO !!!");
-        Slf4jLogConsumer logConsumer = new Slf4jLogConsumer(logger);
+        logger.info("Tested Docker image tag : " + dockerImageTag);
+        logger.info("Config directory : " + configDirPath);
 
         _container = new GenericContainer<>(System.getProperty("image_tag", "homecentr/dns"))
                 .withFileSystemBind(Paths.get(System.getProperty("user.dir"), "..", "example").normalize().toString(), "/config")
                 .waitingFor(Wait.forHealthcheck());
 
         _container.start();
-        _container.followOutput(logConsumer);
+        _container.followOutput(new Slf4jLogConsumer(logger));
     }
 
     @AfterClass
