@@ -14,8 +14,6 @@ public class DnsContainerShould extends ContainerTestBase {
 
     @Test
     public void resolveExternalZoneViaForwarders() throws UnknownHostException, TextParseException {
-        logger.warn("Test: resolveExternalZoneViaForwarders");
-
         Lookup lookup = new Lookup("google.com", Type.A);
         lookup.setResolver(createResolver());
 
@@ -27,8 +25,6 @@ public class DnsContainerShould extends ContainerTestBase {
 
     @Test
     public void resolveInternallyDefinedZone() throws TextParseException, UnknownHostException {
-        logger.warn("Test: resolveInternallyDefinedZone");
-
         Lookup lookup = new Lookup("some-record.test", Type.A);
         lookup.setResolver(createResolver());
 
