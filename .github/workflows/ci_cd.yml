@@ -33,6 +33,12 @@ jobs:
               --label "version=$RELEASE_VERSION" \
               --label "org.label-schema.build-date=$(date '+%F %T')"
 
+      - name: Test Docker image
+        run: docker-compose up --exit-code-from test
+
+      - name: Test Docker image
+        run: chmod 777 example && cd tests && gradle test -Dimage_tag=${{ env.IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
+
       - name: Scan with Phonito Security
         if: env.RELEASE_VERSION != ''
         uses: phonito/phonito-scanner-action@master

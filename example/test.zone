@@ -1,0 +1,11 @@
+$ORIGIN test.
+$TTL 86400
+@	SOA	ns1.test.	hostmaster.test. (
+		2001062501 ; serial
+		10  
+		10  
+		10  
+		10 )
+;
+	NS	ns1.bind9-healthcheck.
+some-record A   127.0.0.122
