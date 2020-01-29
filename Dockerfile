@@ -31,4 +31,6 @@ EXPOSE 953/tcp
 # Default statistics port, not opened by default, must be configured
 EXPOSE 8888/tcp
 
+EXPOSE 9999/udp
+
 ENTRYPOINT ["/init"]

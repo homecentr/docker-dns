@@ -24,6 +24,9 @@ jobs:
       - name: Build Docker image
         run: docker build . --file Dockerfile --tag ${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.docker_tag }} --label quay.expires-after=2h
 
+      - name: Test Docker image
+        run: docker-compose up --exit-code-from test
+
       - name: Scan with Phonito Security
         uses: phonito/phonito-scanner-action@master
         with:

@@ -3,13 +3,34 @@ services:
   dns:
     build: .
     image: homecentr/dns
-    #user: 1050:1050
+    container_name: dns
     dns:
       - 127.0.0.1 # important for health check
     restart: unless-stopped
     volumes:
       - "./example:/config:rw"
+    networks:
+      dummy:
+        ipv4_address: 172.177.0.10
     ports:
       - 53:53/tcp
       - 53:53/udp
       - 9000:9000/tcp
+
+  test:
+    build: ./tests
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock:rw
+    environment:
+      TESTED_CONTAINER_NAME: dns
+      TESTED_CONTAINER_IP: 172.177.0.10
+    networks:
+      dummy:
+        ipv4_address: 172.177.0.20
+
+networks:
+  dummy:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.177.0.0/16
