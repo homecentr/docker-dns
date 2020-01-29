@@ -30,9 +30,7 @@ jobs:
         run: docker build . --file Dockerfile --tag ${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.docker_tag }} --label quay.expires-after=2h
 
       - name: Test Docker image
-        uses: eskatos/gradle-command-action@v1
-        with:
-          arguments: test
+        run: cd tests && gradle test
 
       - name: Scan with Phonito Security
         uses: phonito/phonito-scanner-action@master
