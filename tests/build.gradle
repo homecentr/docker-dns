@@ -12,9 +12,9 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    testCompile "org.testcontainers:testcontainers:1.12.5"
-    testCompile "dnsjava:dnsjava:2.1.9"
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation "org.testcontainers:testcontainers:1.12.5"
+    testImplementation "dnsjava:dnsjava:2.1.9"
 }
 
 test {

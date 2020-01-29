@@ -14,6 +14,7 @@ public abstract class ContainerTestBase {
         String configDirPath = Paths.get(System.getProperty("user.dir"), "..", "example").normalize().toString();
 
         System.out.println("Config dir path: " + configDirPath);
+        System.out.println("Image: " + System.getProperty("image_tag", "homecentr/dns"));
 
         System.out.println(Paths.get(System.getProperty("user.dir"), "..", "example").normalize());
 
