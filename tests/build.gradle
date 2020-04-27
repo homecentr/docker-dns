@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'junit', name: 'junit', version: '4.13'
     testImplementation "org.testcontainers:testcontainers:1.14.1"
     testImplementation "dnsjava:dnsjava:2.1.9"
     testImplementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
