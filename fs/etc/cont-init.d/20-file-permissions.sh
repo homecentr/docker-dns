@@ -1,4 +1,4 @@
 #!/usr/bin/with-contenv ash
 
-chown -R nonroot:nonroot /var/run/named
-chown -R nonroot:nonroot /config-default
+chown -R "$PUID:$PGID" /var/run/named
+chown -R "$PUID:$PGID" /config-default

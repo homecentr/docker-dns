@@ -1,5 +1,3 @@
-#!/usr/bin/execlineb -P
+#!/usr/bin/with-contenv sh
 
-s6-setuidgid nonroot
-
-/usr/sbin/named -f -g -4 -c /config-default/named.conf
+exec s6-setuidgid "$PUID:$PGID" /usr/sbin/named -f -g -4 -c /config-default/named.conf

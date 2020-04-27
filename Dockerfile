@@ -1,11 +1,6 @@
-FROM homecentr/base:1.0.0 as base
-
-FROM alpine:3.11.2
+FROM homecentr/base:2.0.0-alpine
 
 LABEL maintainer="Lukas Holota <me@lholota.com>"
-
-# Copy S6 overlay and shared scripts
-COPY --from=base / /
 
 # Copy S6 scripts & default configs
 COPY ./fs/ /
