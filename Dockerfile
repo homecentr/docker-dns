@@ -1,6 +1,6 @@
 FROM homecentr/base:1.0.0 as base
 
-FROM alpine:3.11.2
+FROM alpine:3.11.6
 
 LABEL maintainer="Lukas Holota <me@lholota.com>"
 
