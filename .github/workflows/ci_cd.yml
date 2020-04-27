@@ -13,6 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
+      - name: Set up java for tests execution
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
       - name: "Determine release version"
         uses: codfish/semantic-release-action@master
         env:
@@ -34,6 +39,7 @@ jobs:
               --label "org.label-schema.build-date=$(date '+%F %T')"
 
       - name: Test Docker image
+        if: env.RELEASE_VERSION != ''
         run: chmod 777 example && cd tests && gradle test -Dimage_tag=${{ env.IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
 
       - name: Scan with Phonito Security
@@ -68,6 +74,7 @@ jobs:
           DOCKERHUB_REPOSITORY: ${{ env.IMAGE_NAME }}
 
       - name: "Notify Microbadger to refresh metadata"
+        if: env.RELEASE_VERSION != ''
         uses: wei/curl@master
         with:
           args: -X POST ${{ secrets.MICROBADGER_NOTIFY_URL }}
