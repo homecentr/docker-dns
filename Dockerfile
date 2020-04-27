@@ -1,4 +1,4 @@
-FROM homecentr/base:1.0.0 as base
+FROM homecentr/base:1.1.0 as base
 
 FROM alpine:3.11.2
 
