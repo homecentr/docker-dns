@@ -1,4 +1,4 @@
-FROM homecentr/base:2.0.0-alpine
+FROM homecentr/base:2.1.0-alpine
 
 LABEL maintainer="Lukas Holota <me@lholota.com>"
 
