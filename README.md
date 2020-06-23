@@ -1,11 +1,10 @@
-[![Project status](https://img.shields.io/badge/Project%20status-stable%20%26%20actively%20maintaned-green.svg)](https://github.com/homecentr/docker-dns/graphs/commit-activity) 
-[![](https://img.shields.io/github/issues-raw/homecentr/docker-dns/bug?label=open%20bugs)](https://github.com/homecentr/docker-dns/labels/bug) 
-[![](https://images.microbadger.com/badges/version/homecentr/cadvisor.svg)](https://hub.docker.com/repository/docker/homecentr/cadvisor)
-[![](https://img.shields.io/docker/pulls/homecentr/cadvisor.svg)](https://hub.docker.com/repository/docker/homecentr/cadvisor) 
-[![](https://img.shields.io/docker/image-size/homecentr/cadvisor/latest)](https://hub.docker.com/repository/docker/homecentr/cadvisor)
+[![Project status](https://badgen.net/badge/project%20status/stable%20%26%20actively%20maintaned?color=green)](https://github.com/homecentr/docker-dns/graphs/commit-activity) [![](https://badgen.net/github/label-issues/homecentr/docker-dns/bug?label=open%20bugs&color=green)](https://github.com/homecentr/docker-dns/labels/bug) [![](https://badgen.net/github/release/homecentr/docker-dns)](https://hub.docker.com/repository/docker/homecentr/dns)
+[![](https://badgen.net/docker/pulls/homecentr/dns)](https://hub.docker.com/repository/docker/homecentr/dns) 
+[![](https://badgen.net/docker/size/homecentr/dns)](https://hub.docker.com/repository/docker/homecentr/dns)
 
 ![CI/CD on master](https://github.com/homecentr/docker-dns/workflows/CI/CD%20on%20master/badge.svg)
 ![Regular Docker image vulnerability scan](https://github.com/homecentr/docker-dns/workflows/Regular%20Docker%20image%20vulnerability%20scan/badge.svg)
+
 
 
 # HomeCenter - DNS
