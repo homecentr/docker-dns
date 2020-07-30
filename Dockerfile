@@ -7,8 +7,7 @@ COPY ./fs/ /
 
 RUN apk add --no-cache \
       bind=9.14.12-r0 \
-      libcap=2.27-r0 \
-      shadow=4.8.1-r0 && \
+      libcap=2.27-r0 && \
     # Grant the named process to open a well-known port (1-1024) which normally requires root permissions
     setcap 'cap_net_bind_service=+ep' /usr/sbin/named
 
